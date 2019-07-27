@@ -53,4 +53,11 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :events, only => [:post, :get]
+  delete '/erase', to: 'events#erase'
+  get '/events/actors/:actor_id'
+  put '/actors'
+  get '/actors'
+  get '/actors/streak'
 end
