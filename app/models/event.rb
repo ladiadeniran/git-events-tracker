@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Event < ActiveRecord
+class Event < ApplicationRecord
   has_many :actor_events
   has_many :actors, through: :actor_events
 

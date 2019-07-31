@@ -54,10 +54,10 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  resources :events, only => [:post, :get]
-  delete '/erase', to: 'events#erase'
-  get '/events/actors/:actor_id'
-  put '/actors'
-  get '/actors'
-  get '/actors/streak'
+  resources :events, :only => [:post, :get]
+  # delete '/erase', to: 'events#erase'
+  # get '/events/actors/:actor_id'
+  # put '/actors'
+  # get '/actors'
+  # get '/actors/streak'
 end
