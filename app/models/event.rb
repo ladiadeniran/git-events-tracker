@@ -1,9 +1,30 @@
-# frozen_string_literal: true
+class Event < ActiveRecord::Base
+  self.inheritance_column = nil
+  belongs_to :actor
+  belongs_to :repo
+  validates :id, uniqueness: true
 
-class Event < ApplicationRecord
-  has_many :actor_events
-  has_many :actors, through: :actor_events
+  def to_specs
+    {
+      id: id,
+      type: type,
+      actor: {
+        id: actor.id,
+        login: actor.login,
+        avatar_url: actor.avatar_url
+      },
+      repo: {
+        id: repo.id,
+        name: repo.name,
+        url: repo.url
+      },
+      created_at: created_at
+    }
+  end
 
-  has_many :repo_events
-  has_many :repos, through: :repo_events
+  def self.ordered_events
+    order(:id).map do |event|
+      event.to_specs
+    end
+  end
 end

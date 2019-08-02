@@ -19,13 +19,14 @@ RSpec.describe "Github Events", type: :request do
           url += req["request"]["url"]
           get url, body
           body = JSON.parse(response.body)
+          # binding.pry
           expect(response.status).to eq(req["response"]["status_code"])
-          expect(body["body"]).to eq(req["response"]["body"])
+          expect(body).to eq(req["response"]["body"])
 
         elsif req["request"]["method"] == "POST"
           url += req["request"]["url"]
           post(url, body)
-          body = JSON.parse(response.body)
+          # body = JSON.parse(response.body)
           expect(response.status).to eq(req["response"]["status_code"])
 
         elsif req["request"]["method"] == "DELETE"
