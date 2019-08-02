@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
         name: repo.name,
         url: repo.url
       },
-      created_at: created_at.to_s
+      created_at: created_at.to_s(:db)
     }
   end
 
