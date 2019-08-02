@@ -9,20 +9,22 @@ class ActorsController < ApplicationController
   end
 
   def update
-    actor_params = params[:actor]
     search_params = actor_params.except(:avatar_url, :id)
     actor = Actor.find(search_params)
     render status: 400 unless actor
     actor = Actor.find(actor_params[:id])
     actor.update(actor_params)
     render json status: 200
-    rescue_from ActiveRecord::RecordNotFound
-
+  rescue ActiveRecord::RecordNotFound
       render json: {}, status: 404
   end
 
   def index
     render json: Actor.order_by_events, status: 200
+  end
+
+  def actor_params
+    params.permit(:id, :login, :avatar_url)
   end
 
   def streak

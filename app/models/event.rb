@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   self.inheritance_column = nil
+  self.record_timestamps = false
   belongs_to :actor
   belongs_to :repo
   validates :id, uniqueness: true
@@ -18,7 +19,7 @@ class Event < ActiveRecord::Base
         name: repo.name,
         url: repo.url
       },
-      created_at: created_at
+      created_at: created_at.to_s
     }
   end
 

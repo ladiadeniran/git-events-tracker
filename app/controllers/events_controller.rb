@@ -9,7 +9,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.actor = Actor.find_or_create_by!(actor_params)
     @event.repo = Repo.find_or_create_by!(repo_params)
-    if @event.save
+    if @event.save(touch: false)
       render json: @event.to_specs, status: 201
     else
       render json: "Invalid Record", status: 400
@@ -27,6 +27,7 @@ class EventsController < ApplicationController
     {
       id: params[:id],
       type: params[:type],
+      created_at: params[:created_at]
     }
   end
 
