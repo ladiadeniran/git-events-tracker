@@ -5,7 +5,7 @@ class ActorsController < ApplicationController
     actor_events = actor.ordered_events
     render json: actor_events, status: 200
   rescue ActiveRecord::RecordNotFound
-    render json: "Record not Found", status: 404
+    render json: {}, status: 404
   end
 
   def update
@@ -17,7 +17,8 @@ class ActorsController < ApplicationController
     actor.update(actor_params)
     render json status: 200
     rescue_from ActiveRecord::RecordNotFound
-      render json: "Record not Found", status: 404
+
+      render json: {}, status: 404
   end
 
   def index
