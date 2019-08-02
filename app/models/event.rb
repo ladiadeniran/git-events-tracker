@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   belongs_to :actor
   belongs_to :repo
   validates :id, uniqueness: true
-
+  self.primary_key = :id
   def to_specs
     {
       id: id,

@@ -1,7 +1,7 @@
 class Actor < ActiveRecord::Base
   validates :login, uniqueness: true, presence: true
   validates :id, uniqueness: true, presence: true
-
+  self.primary_key = :id
   def ordered_events
     events.order(:id).map do |event|
       event.to_specs

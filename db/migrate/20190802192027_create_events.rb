@@ -1,11 +1,11 @@
 class CreateEvents < ActiveRecord::Migration
   def up
     create_table :events, id: false do |t|
-      t.primary_key :id
+      t.bigint :id, options: 'PRIMARY_KEY', limit: 11
       t.string :type
       t.datetime :created_at
-      t.integer :actor_id, foreign_key: true
-      t.integer :repo_id, foreign_key: true
+      t.bigint :actor_id, foreign_key: true
+      t.bigint :repo_id, foreign_key: true
     end
   end
 
