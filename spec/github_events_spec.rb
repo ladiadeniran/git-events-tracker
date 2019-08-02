@@ -40,7 +40,6 @@ RSpec.describe "Github Events", type: :request do
           body = JSON.parse(response.body)
           expect(response.status).to eq(req["response"]["status_code"])
           expect(body["body"]).to eq(req["response"]["body"])
-
         end
       end
     end

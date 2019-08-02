@@ -9,14 +9,16 @@ class ActorsController < ApplicationController
   end
 
   def update
+    # binding.pry
     search_params = actor_params.except(:avatar_url, :id)
-    actor = Actor.find(search_params)
-    render status: 400 unless actor
+    actor = Actor.where(search_params)
+    render json: {}, status: 400 if actor.blank?
     actor = Actor.find(actor_params[:id])
     actor.update(actor_params)
-    render json status: 200
   rescue ActiveRecord::RecordNotFound
       render json: {}, status: 404
+  else
+    render json: actor, status: 200
   end
 
   def index
